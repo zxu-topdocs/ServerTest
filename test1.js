@@ -1,25 +1,22 @@
 const fs = require('fs');
-const myfiles = fs.readdir('./', function(err,files){
-         if (err) console.log('error', err);
-         else console.log("result", files);
+const EventEmitter = require('events');
+
+//const myfiles = fs.readdirSync('./')
+//console.log(myfiles)
+
+const myfiles = fs.readdir('./', function(error,files){
+          if (error) console.log('error', error);
+          //else console.log(`result is ${files}`);
+          else console.log('result:', files);
 })|"ascii";
 
-const EventEmitter = require('events');
-const emitter = new EventEmitter;
 
-emitter.on('somethinghappen', (arg)=>{return console.log("something is happen", arg)});
+const Log1 = require('./logger');
+const myLog = new Log1(); 
 
-emitter.emit('somethinghappen', {id:1, mydata:'first time events'});
+myLog.on('writeToLog', (arg1)=>{return console.log("writeToLog event is happen", arg1)});
 
-
-
-
-
-// fs.readdir('./', function(err,files){
-//     if (err) console.log('error', err);
-//     else console.log("result", files);
-// });
-
+myLog.log("something is happened");
 // class fileTest{   
 
 //     myFiles(){

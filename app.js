@@ -101,19 +101,19 @@ function validateCourse(course){
 });*/
 
 
-var mysql = require('mysql');
+// var mysql = require('mysql');
 
-var con = mysql.createConnection({
-  host: "localhost",
-  user: "yourusername",
-  password: "yourpassword"
-});
+// var con = mysql.createConnection({
+//   host: "localhost",
+//   user: "yourusername",
+//   password: "yourpassword"
+// });
 
-con.connect(function(err) {
-  if (err) throw err;
-  console.log("Connected!");
-  con.query("Select * from Customers", function (err, result, fields) {
-    if (err) throw err;
-    console.log(result);
-  });
-});
+// con.connect(function(err) {
+//   if (err) throw err;
+//   console.log("Connected!");
+//   con.query("Select * from Customers", function (err, result, fields) {
+//     if (err) throw err;
+//     console.log(result);
+//   });
+// });
