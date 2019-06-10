@@ -75,7 +75,7 @@ app.put("/api/course/:id", (req,res)=>{
 
 app.delete("/api/course/:id", (req,res)=>{
     const course = courses.find(c=> c.id === parseInt(req.params.id ) );
-    if (!course) {
+    if (!course)  
          res.status(404).send('course not found');  
          return;
     }
