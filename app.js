@@ -8,6 +8,7 @@ module.exports =app;
 
 app.get("/", (req,res)=>{
     res.send("hello world!!!!");
+    res.end();
 }); 
 
 const courses = [
@@ -75,16 +76,16 @@ app.put("/api/course/:id", (req,res)=>{
 
 app.delete("/api/course/:id", (req,res)=>{
     const course = courses.find(c=> c.id === parseInt(req.params.id ) );
-    if (!course)  
+    if (!course)  {
          res.status(404).send('course not found');  
          return;
-    }
+    };
     
     const index= courses.indexOf(course);
     courses.splice(index,1);
 
     res.send(course.id + " is deleted");
-});
+})
 
 function validateCourse(course){
     const schema ={
@@ -98,3 +99,21 @@ function validateCourse(course){
         message : "it works"
     });
 });*/
+
+
+var mysql = require('mysql');
+
+var con = mysql.createConnection({
+  host: "localhost",
+  user: "yourusername",
+  password: "yourpassword"
+});
+
+con.connect(function(err) {
+  if (err) throw err;
+  console.log("Connected!");
+  con.query("Select * from Customers", function (err, result, fields) {
+    if (err) throw err;
+    console.log(result);
+  });
+});
