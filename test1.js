@@ -10,7 +10,6 @@ const myfiles = fs.readdir('./', function(error,files){
           else console.log('result:', files);
 })|"ascii";
 
-
 const Log1 = require('./logger');
 const myLog = new Log1(); 
 

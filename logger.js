@@ -12,5 +12,4 @@ class MyLog extends EventEmitter {
     }
 }
 
-
 module.exports  = MyLog;
