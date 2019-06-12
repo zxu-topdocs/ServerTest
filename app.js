@@ -17,6 +17,8 @@ const courses = [
 ];
 
 app.get("/api/course", (req,res)=>{
+    const sortBy = req.query.sortBy;
+    if (sortBy =="name") {courses.sort.name };
 
     res.send(courses);
 }); 
@@ -29,7 +31,8 @@ app.get("/api/course", (req,res)=>{
 })*/
 
 app.get("/api/course/:id", (req,res)=>{
-    const course = courses.find(c=> c.id === parseInt(req.params.id ) );
+    const courseId = req.params.id;
+    const course = courses.find(c=> c.id === parseInt(courseId));
     (!course)? res.status(404).send('course not found') : res.send(course);   
 });
 
@@ -51,18 +54,24 @@ app.post("/api/course", (req,res)=>{
    };
 
    courses.push (course);
-   res.send('id is ' + course.id);
+   res.send('new id is ' + course.id);
 
 });
 
 app.put("/api/course/:id", (req,res)=>{
     const course = courses.find(c=> c.id === parseInt(req.params.id ) );
     if (!course) return res.status(404).send('course not found');       
-       
-    const result = validateCourse(req.body);
-    const {error} = validateCourse(req.body);  //result has error and value, we only need error
-    
+     
+    //method 1 old
+    //const result = validateCourse(req.body);
+    //if (result.error) { 
+    //    res.status(400).send(result.error.details[0].message); 
+    //    return;
+    //}    
+    //method 2 new
+    const {error} = validateCourse(req.body);  //result has error and value, we only need error    
     if (error) return res.status(400).send(error.details[0].message); 
+
     /*if (error){
         res.status(400).send(error.details[0].message); 
         return;
@@ -79,7 +88,8 @@ app.delete("/api/course/:id", (req,res)=>{
          res.status(404).send('course not found');  
          return;
     };
-    
+    //if (!course) return res.status(404).send('course not found');
+
     const index= courses.indexOf(course);
     courses.splice(index,1);
 
